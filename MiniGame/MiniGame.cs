@@ -13,6 +13,9 @@ namespace MiniGame
         private int _vyskaOkna = 600;
 
         private Ctverecek _ctverecek;
+        private Ctverecek2 _ctverecek2;
+        private Ctverecek3 _ctverecek3;
+
 
         public MiniGame()
         {
@@ -37,10 +40,26 @@ namespace MiniGame
 
             _ctverecek = new Ctverecek(
                 50, 5,
-                new Vector2((_sirkaOkna - 50) / 2, (_vyskaOkna - 50) / 2),
+                new Vector2((100), (350)),
+                new SmeroveOvladani(Keys.A, Keys.D, Keys.W, Keys.S),
+                new Rectangle(0, 0, _sirkaOkna, _vyskaOkna),
+                Color.Red, GraphicsDevice
+            );
+
+            _ctverecek2 = new Ctverecek2(
+                50, 5,
+                new Vector2((350), (300)),
+                new SmeroveOvladani(Keys.J, Keys.L, Keys.I, Keys.K),
+                new Rectangle(0, 0, _sirkaOkna, _vyskaOkna),
+                Color.Green, GraphicsDevice
+            );
+
+            _ctverecek3 = new Ctverecek3(
+                50, 5,
+                new Vector2((600), (400)),
                 new SmeroveOvladani(Keys.Left, Keys.Right, Keys.Up, Keys.Down),
                 new Rectangle(0, 0, _sirkaOkna, _vyskaOkna),
-                Color.Black, GraphicsDevice
+                Color.Blue, GraphicsDevice
             );
         }
 
@@ -52,16 +71,22 @@ namespace MiniGame
                 Exit();
 
             _ctverecek.Aktualizovat(klavesnice);
+            _ctverecek2.Aktualizovat(klavesnice);
+            _ctverecek3.Aktualizovat(klavesnice);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Beige);
 
             _spriteBatch.Begin();
+
             _ctverecek.Vykreslit(_spriteBatch);
+            _ctverecek2.Vykreslit(_spriteBatch);
+            _ctverecek3.Vykreslit(_spriteBatch);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
